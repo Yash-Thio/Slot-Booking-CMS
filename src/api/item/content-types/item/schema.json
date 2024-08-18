@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items",
+  "info": {
+    "singularName": "item",
+    "pluralName": "items",
+    "displayName": "Items",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Small_Description": {
+      "type": "string",
+      "required": true,
+      "maxLength": 86
+    },
+    "Large_Description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 1000
+    }
+  }
+}
