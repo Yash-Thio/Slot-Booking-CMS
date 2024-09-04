@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reviews",
+  "info": {
+    "singularName": "review",
+    "pluralName": "reviews",
+    "displayName": "Reviews"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Review": {
+      "type": "text",
+      "required": true,
+      "unique": true,
+      "maxLength": 300
+    },
+    "Name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
