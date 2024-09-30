@@ -787,36 +787,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiBackgroundBackground extends Schema.CollectionType {
-  collectionName: 'backgrounds';
-  info: {
-    singularName: 'background';
-    pluralName: 'backgrounds';
-    displayName: 'Background';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Image: Attribute.Media<'images'> & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::background.background',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::background.background',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiEventDetailEventDetail extends Schema.SingleType {
   collectionName: 'event_details';
   info: {
@@ -858,6 +828,62 @@ export interface ApiEventDetailEventDetail extends Schema.SingleType {
       'api::event-detail.event-detail',
       'oneToMany',
       'api::event-detail.event-detail'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiImageImage extends Schema.CollectionType {
+  collectionName: 'images';
+  info: {
+    singularName: 'image';
+    pluralName: 'images';
+    displayName: 'Images';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    Format: Attribute.Enumeration<['Landscape', 'Portrait']> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'Portrait'>;
+    Image: Attribute.Media<'images', true> &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::image.image',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::image.image',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::image.image',
+      'oneToMany',
+      'api::image.image'
     >;
     locale: Attribute.String;
   };
@@ -981,8 +1007,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::background.background': ApiBackgroundBackground;
       'api::event-detail.event-detail': ApiEventDetailEventDetail;
+      'api::image.image': ApiImageImage;
       'api::item.item': ApiItemItem;
       'api::review.review': ApiReviewReview;
       'api::slide-show.slide-show': ApiSlideShowSlideShow;
